@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <title>Auto Trading Bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<header>
+    <h1>Auto Trading Bot</h1>
+    <div class="controls">
+        <select id="mode">
+            <option value="BACKTEST">BACKTEST</option>
+            <option value="LIVE">LIVE</option>
+        </select>
+        <input id="symbol" value="BTCUSDT" />
+        <select id="interval">
+            <option>1m</option><option>5m</option><option>15m</option><option>1h</option>
+        </select>
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resumeBtn">Resume</button>
+        <button id="stopBtn">Stop</button>
+    </div>
+</header>
+
+<section class="cards">
+    <div class="card">
+        <h3>Status</h3>
+        <pre id="statusBox">...</pre>
+    </div>
+    <div class="card">
+        <h3>Wallet</h3>
+        <pre id="portfolioBox">...</pre>
+    </div>
+</section>
+
+<section class="chart-card">
+    <h3>Equity</h3>
+    <canvas id="equityChart"></canvas>
+</section>
+
+<section class="table-card">
+    <h3>Trades</h3>
+    <table id="tradesTable">
+        <thead>
+        <tr><th>Date</th><th>Symbol</th><th>Action</th><th>Quantity</th><th>Price</th><th>PnL</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

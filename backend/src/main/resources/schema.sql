@@ -1,0 +1,46 @@
+CREATE TABLE IF NOT EXISTS account (
+id SERIAL PRIMARY KEY,
+base_currency VARCHAR(10) NOT NULL DEFAULT 'BTC',
+quote_currency VARCHAR(10) NOT NULL DEFAULT 'USDT',
+cash_balance NUMERIC(18,8) NOT NULL DEFAULT 10000.0,
+created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+
+CREATE TABLE IF NOT EXISTS holdings (
+id SERIAL PRIMARY KEY,
+symbol VARCHAR(20) NOT NULL,
+quantity NUMERIC(18,8) NOT NULL DEFAULT 0
+);
+CREATE UNIQUE INDEX IF NOT EXISTS ux_holdings_symbol ON holdings(symbol);
+
+
+CREATE TABLE IF NOT EXISTS trades (
+id BIGSERIAL PRIMARY KEY,
+ts TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+symbol VARCHAR(20) NOT NULL,
+side VARCHAR(4) NOT NULL CHECK (side IN ('BUY','SELL')),
+qty NUMERIC(18,8) NOT NULL,
+price NUMERIC(18,8) NOT NULL,
+fee NUMERIC(18,8) NOT NULL DEFAULT 0,
+pnl NUMERIC(18,8)
+);
+CREATE INDEX IF NOT EXISTS ix_trades_symbol_ts ON trades(symbol, ts);
+
+
+CREATE TABLE IF NOT EXISTS equity_curve (
+ts TIMESTAMPTZ NOT NULL,
+equity NUMERIC(18,8) NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_equity_ts ON equity_curve(ts);
+
+
+
+
+INSERT INTO account (base_currency, quote_currency, cash_balance)
+VALUES ('BTC','USDT',10000.0)
+ON CONFLICT DO NOTHING;
+
+
+INSERT INTO holdings (symbol, quantity) VALUES ('BTCUSDT', 0)
+ON CONFLICT (symbol) DO NOTHING;

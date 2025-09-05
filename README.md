@@ -1,7 +1,4 @@
-Auto Trading Bot
-
 Setup
-1. Prerequisites
 
 Java 17+
 
@@ -9,7 +6,7 @@ Gradle (wrapper included)
 
 PostgreSQL
 
-2. Database
+1. Database
 
 Create database:
 
@@ -19,7 +16,6 @@ Run
 Backend
 cd backend
 ./gradlew bootRun
-
 
 Backend runs on: http://localhost:8080
 

@@ -5,7 +5,7 @@ const fmt = (n, d=2) => Number(n).toFixed(d);
 
 function showError(msg) {
   const box = document.getElementById('statusBox');
-  box.textContent = `⚠️ ${msg}`;
+  box.textContent = `${msg}`;
 }
 
 async function fetchJSON(url, opts) {
